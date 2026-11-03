@@ -1,0 +1,11 @@
+<%- include('partials/header') %>
+<h1 class="page-title"><%= title %></h1>
+<div class="card-grid">
+  <% categories.forEach((category) => { %>
+    <div class="card category-card">
+      <h2><%= category %></h2>
+      <p>Explore service opportunities in <%= category %>.</p>
+    </div>
+  <% }); %>
+</div>
+<%- include('partials/footer') %>

@@ -1,0 +1,21 @@
+{
+  "name": "cse340",
+  "version": "1.0.0",
+  "description": "W01 Initial Site Creation",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

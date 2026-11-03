@@ -1,0 +1,12 @@
+<%- include('partials/header') %>
+<h1 class="page-title"><%= title %></h1>
+<div class="card-grid">
+  <% serviceProjects.forEach((project) => { %>
+    <div class="card">
+      <h2><%= project.title %></h2>
+      <p><strong>Category:</strong> <%= project.category %></p>
+      <p><strong>Date:</strong> <%= project.date %></p>
+    </div>
+  <% }); %>
+</div>
+<%- include('partials/footer') %>
