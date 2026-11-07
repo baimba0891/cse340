@@ -3,9 +3,12 @@
 <div class="card-grid">
   <% organizations.forEach((org) => { %>
     <div class="card">
-      <img src="<%= org.image %>" alt="<%= org.name %>">
+      <img src="/images/<%= org.logo_filename %>" alt="<%= org.name %>">
       <h2><%= org.name %></h2>
       <p><%= org.description %></p>
+      <p><a href="mailto:<%= org.contact_email %>">
+          <%= org.contact_email %>
+        </a></p>
     </div>
   <% }); %>
 </div>
