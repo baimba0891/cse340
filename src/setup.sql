@@ -25,3 +25,40 @@ INSERT INTO service_projects (organization_id, title, description, location, pro
 (3, 'Food Bank Distribution', 'Pack and distribute food boxes', 'Food Bank Warehouse', '2026-05-08'),
 (3, 'Hygiene Kit Drive', 'Collect and deliver hygiene kits', 'Shelter Downtown', '2026-05-30'),
 (3, 'Mental Health Awareness Walk', 'Community walk and resource fair', 'Central Park', '2026-06-20');
+-- W02 Assignment: Categories
+
+CREATE TABLE IF NOT EXISTS categories (
+  category_id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS project_categories (
+  project_id INT NOT NULL REFERENCES service_projects(project_id) ON DELETE CASCADE,
+  category_id INT NOT NULL REFERENCES categories(category_id) ON DELETE CASCADE,
+  PRIMARY KEY (project_id, category_id)
+);
+
+INSERT INTO categories (name) VALUES
+  ('Environmental'),
+  ('Educational'),
+  ('Community Service'),
+  ('Health and Wellness')
+ON CONFLICT (name) DO NOTHING;
+
+INSERT INTO project_categories (project_id, category_id) VALUES
+  (1, 3),
+  (2, 1),
+  (3, 2),
+  (4, 1), (4, 2),
+  (5, 2),
+  (6, 1),
+  (7, 3),
+  (8, 2), (8, 3),
+  (9, 1),
+  (10, 1), (10, 3),
+  (11, 4), (11, 3),
+  (12, 3),
+  (13, 1),
+  (14, 2),
+  (15, 4)
+ON CONFLICT DO NOTHING;
