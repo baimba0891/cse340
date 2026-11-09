@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js';
+import { getAllProjects } from './src/models/projects.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -55,15 +56,12 @@ app.get('/organizations', async (req, res) => {
     res.render('organizations', { title, organizations });
 });
 
+
 app.get('/projects', async (req, res) => {
+  const serviceProjects = await getAllProjects();
+  console.log(serviceProjects);
   const pageTitle = 'Service Projects';
   res.render('projects', { title: pageTitle, serviceProjects });
-});
-
-app.get('/categories', async (req, res) => {
-  const pageTitle = 'Categories';
-  const categories = ['Environmental', 'Educational', 'Community Service', 'Health and Wellness'];
-  res.render('categories', { title: pageTitle, categories });
 });
 
 app.listen(PORT, async () => {
