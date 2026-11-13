@@ -3,9 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { testConnection } from './src/models/db.js';
-import { getAllOrganizations } from './src/models/organizations.js';
-import { getAllProjects } from './src/models/projects.js';
-import { getAllCategories } from './src/models/categories.js';
+import router from './src/routes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -53,38 +51,8 @@ const serviceProjects = [
   { title: 'Food Bank Support', category: 'Community Service', date: '2026-03-22' }
 ];
 
-app.get('/', async (req, res) => {
-  const pageTitle = 'Home';
-  res.render('home', { title: pageTitle });
-});
-
-app.get('/organizations', async (req, res) => {
-    const organizations = await getAllOrganizations();
-    console.log(organizations);
-      
-    const title = 'Our Partner Organizations';
-    res.render('organizations', { title, organizations });
-});
-
-
-app.get('/projects', async (req, res) => {
-  const serviceProjects = await getAllProjects();
-  console.log(serviceProjects);
-  const pageTitle = 'Service Projects';
-  res.render('projects', { title: pageTitle, serviceProjects });
-});
-
-app.get('/categories', async (req, res) => {
-  const categories = await getAllCategories();
-  console.log(categories);
-  const pageTitle = 'Service Project Categories';
-  res.render('categories', { title: pageTitle, categories });
-});
-app.get('/test-error', (req, res, next) => {
-    const err = new Error('This is a test error');
-    err.status = 500;
-    next(err);
-});
+// Use the imported router to handle routes
+app.use(router);
 
 app.use((req, res, next) => {
     const err = new Error('Page Not Found');
