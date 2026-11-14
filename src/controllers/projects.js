@@ -1,5 +1,6 @@
 // Import any needed model functions
 import { getUpcomingProjects, getProjectDetails } from '../models/projects.js';
+import { getCategoriesByProjectId } from '../models/categories.js';
 const NUMBER_OF_UPCOMING_PROJECTS = 5;
 
 // Define any controller functions
@@ -11,10 +12,11 @@ const showProjectsPage = async (req, res) => {
 
 const showProjectDetailsPage = async (req, res) => {
     const projectId = req.params.id;
-    const project = await getProjectDetails(projectId);
+  const project = await getProjectDetails(projectId);
+  const categories = await getCategoriesByProjectId(projectId);
     const title = 'Project Details';
 
-    res.render('project', { title, project });
+   res.render('project', { title, project, categories });
 };
 
 // Export any controller functions
