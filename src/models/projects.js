@@ -105,4 +105,26 @@ const getProjectsByCategoryId = async (categoryId) => {
 
       return result.rows;
 };
-export { getAllProjects, getProjectsByOrganizationId, getUpcomingProjects, getProjectDetails, getProjectsByCategoryId };
+
+const updateProject = async (projectId, title, description, location, project_date, organization_id) => {
+  const query = `
+    UPDATE public.service_projects
+    SET title = $1,
+        description = $2,
+        location = $3,
+        project_date = $4,
+        organization_id = $5
+    WHERE project_id = $6
+    RETURNING *;
+  `;
+
+  const queryParams = [title, description, location, project_date, organization_id, projectId];
+  const result = await db.query(query, queryParams);
+
+  if (result.rows.length === 0) {
+    throw new Error("Project update failed. No project found with that ID.");
+  }
+
+  return result.rows[0];
+};
+export { getAllProjects, getProjectsByOrganizationId, getUpcomingProjects, getProjectDetails, getProjectsByCategoryId , updateProject};
