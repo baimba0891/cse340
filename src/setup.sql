@@ -1,3 +1,18 @@
+CREATE TABLE IF NOT EXISTS organization (
+  organization_id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  contact_email VARCHAR(255),
+  logo_filename VARCHAR(255)
+);
+
+INSERT INTO organization (organization_id, name, description, contact_email, logo_filename) VALUES
+  (1, 'BrightFuture Builders', 'A nonprofit focused on improving community infrastructure through sustainable construction projects.', 'info@brightfuturebuilders.org', 'org1.jpg'),
+  (2, 'GreenHarvest Growers', 'An urban farming collective promoting food sustainability and education in local neighborhoods.', 'contact@greenharvest.org', 'org2.jpg'),
+  (3, 'UnityServe Volunteers', 'A volunteer coordination group supporting local charities and service initiatives.', 'hello@unityserve.org', 'org3.jpg')
+ON CONFLICT (organization_id) DO NOTHING;
+
+SELECT setval('organization_organization_id_seq', (SELECT MAX(organization_id) FROM organization));
 -- W02: Service Projects - links to existing organization table
 
 CREATE TABLE service_projects (
